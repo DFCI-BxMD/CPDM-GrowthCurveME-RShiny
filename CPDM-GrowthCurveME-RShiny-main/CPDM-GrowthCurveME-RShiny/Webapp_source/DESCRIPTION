@@ -1,0 +1,8 @@
+Title: CPDM-GrowthCurveME-RShiny
+License: DFCI
+Author: Ledia Gebremedhin <ledia_gebremedhin@dfci.harvard.edu>
+Author: Anand Panigrahy <anand_panigrahy@dfci.harvard.edu>
+# AuthorUrl: http://www.rstudio.com/
+Tags: getting-started GrowthCurveME
+DisplayMode: normal
+Type: Shiny

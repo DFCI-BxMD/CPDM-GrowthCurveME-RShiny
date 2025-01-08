@@ -1,0 +1,40 @@
+{
+  "name": "rds_visualizer",
+  "title": "rds_visualizer",
+  "summary": "RDS visualizing webapp",
+  "dxapi": "1.0.0",
+  "version": "0.0.2",
+  "httpsApp": {
+          "ports": [443],
+          "shared_access": "VIEW"
+      },
+  "inputSpec": [],
+  "outputSpec": [],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 48
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/code.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+  },
+  "access": {
+    "network": [
+      "*"
+    ],
+    "project": "CONTRIBUTE"
+  },
+  "regionalOptions": {
+    "aws:us-east-1": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_v2_x4"
+        }
+      }
+    }
+  }
+}
