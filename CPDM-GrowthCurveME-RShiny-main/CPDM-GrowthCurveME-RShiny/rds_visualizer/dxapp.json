@@ -1,9 +1,9 @@
 {
-  "name": "rds_visualizer",
-  "title": "rds_visualizer",
-  "summary": "RDS visualizing webapp",
+  "name": "CPDM_GrowthCurveME_RShiny",
+  "title": "CPDM_GrowthCurveME_RShiny",
+  "summary": "CPDM GrowthCurveME RShiny webapp",
   "dxapi": "1.0.0",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "httpsApp": {
           "ports": [443],
           "shared_access": "VIEW"
