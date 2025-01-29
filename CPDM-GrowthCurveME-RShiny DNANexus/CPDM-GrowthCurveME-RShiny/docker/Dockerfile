@@ -1,5 +1,5 @@
 # Use the official R image as the base image
-FROM rocker/shiny
+FROM --platform=linux/amd64 rocker/shiny
 
 # Install system dependencies for the R packages
 RUN apt-get clean && \
