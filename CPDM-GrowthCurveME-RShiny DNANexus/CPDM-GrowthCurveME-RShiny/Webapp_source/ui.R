@@ -1,3 +1,22 @@
+library(shiny)
+library(shinythemes)
+library(readxl)
+library(GrowthCurveME)
+library(data.table)
+library(flextable)
+library(ggplot2)
+library(readr)
+library(viridis)
+library(htmltools)
+library(DT)
+library(officer)
+library(ggtree)
+library(tinytex)
+library(shinycssloaders)
+library(shinyjs)
+library(magrittr)
+library(dplyr)
+
 shinyUI(fluidPage(
   theme = shinytheme("cerulean"),
   titlePanel("GrowthCurveME RShiny"),
