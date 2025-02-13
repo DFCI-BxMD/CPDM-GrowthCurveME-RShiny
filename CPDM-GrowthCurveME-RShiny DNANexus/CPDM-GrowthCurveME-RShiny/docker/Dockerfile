@@ -13,11 +13,13 @@ RUN apt-get clean && \
     libpng-dev \
     libtiff5-dev \
     libjpeg-dev \
+    libgsl-dev \ 
+    libglpk-dev \
     cmake \
     git
 
 # Install R packages
-RUN R -e "install.packages(c('shiny', 'shinythemes', 'readxl', 'data.table', 'flextable', 'ggplot2', 'readr', 'viridis', 'htmltools', 'DT', 'officer', 'ggtree'))"
-
+#RUN R -e "install.packages(c('shiny', 'shinythemes', 'readxl', 'data.table', 'flextable', 'ggplot2', 'readr', 'viridis', 'htmltools', 'DT', 'officer', 'ggtree'))"
+RUN R -e "install.packages(c('shiny', 'shinythemes', 'readxl', 'data.table', 'flextable', 'ggplot2', 'readr', 'viridis', 'htmltools', 'DT', 'officer', 'ggtree', 'tinytex', 'shinycssloaders', 'shinyjs', 'magrittr', 'dplyr'))"
 # Install GrowthCurveME packages
 RUN R -e "install.packages('GrowthCurveME')"
