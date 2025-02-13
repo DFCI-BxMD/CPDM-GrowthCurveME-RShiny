@@ -20,6 +20,9 @@ RUN apt-get clean && \
 
 # Install R packages
 #RUN R -e "install.packages(c('shiny', 'shinythemes', 'readxl', 'data.table', 'flextable', 'ggplot2', 'readr', 'viridis', 'htmltools', 'DT', 'officer', 'ggtree'))"
-RUN R -e "install.packages(c('shiny', 'shinythemes', 'readxl', 'data.table', 'flextable', 'ggplot2', 'readr', 'viridis', 'htmltools', 'DT', 'officer', 'ggtree', 'tinytex', 'shinycssloaders', 'shinyjs', 'magrittr', 'dplyr'))"
+RUN R -e "install.packages(c('shiny', 'shinythemes', 'readxl', 'data.table', 'flextable', 'ggplot2', 'readr', 'viridis', 'htmltools', 'DT', 'officer', 'tinytex', 'shinycssloaders', 'shinyjs', 'magrittr', 'dplyr'))"
+# install ggtree
+RUN R -e "install.packages('BiocManager')"
+RUN R -e "BiocManager::install('ggtree')"
 # Install GrowthCurveME packages
 RUN R -e "install.packages('GrowthCurveME')"
