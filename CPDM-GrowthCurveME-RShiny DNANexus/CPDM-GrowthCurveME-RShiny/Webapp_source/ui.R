@@ -83,13 +83,21 @@ shinyUI(fluidPage(
               Download the R package version of GrowthCurveME from CRAN and visit our GitHub page to learn more: <a href="https://github.com/cancermodels-org/GrowthCurveME" target="_blank">https://github.com/cancermodels-org/GrowthCurveME</a>.'
             )
           ),
-          p(style = "font-size: 16px;", "The step-by-step instructions will guide you through the analysis process effectively."),
+          p(style = "font-size: 14px;", "The step-by-step instructions will guide you through the analysis process effectively."),
+          p(style = "font-size: 14px;","Upload your dataset using the 'Upload Input Data' button. The file must be in *.xlsx, *.csv, or *.txt format and input file should contain at least the following columns: 'cluster', 'time', and 'growth_metric.'", tags$br(),
+            "Upon uploading, the 'Best Fit Model' is automatically computed using the least-square regression type, based on R-squared deviations. If you select Mixed and press Best Fit Model, it will calculate and provide the best-fit model.", tags$br(),
+            br(),
+            "Model performance evaluates evaluates different growth models (exponential, linear, logistic, and Gompertz) by calculating the R-squared deviation, which measures how well each model's predicted values fit the actual data.", tags$br(),
+            "The R² value is computed as 1 minus the ratio of the sum of squared residuals (SSR) to the total sum of squares (SST), where a higher R² indicates a better fit.", 
+            "The model with the highest R² is selected as the best-fitting model for the given dataset.",
+            br(),
+            # Formula using MathJax
+            "The R² value is calculated as: ", tags$span(
+              withMathJax('$$ R^2 = 1 - \\frac{SSR}{SST} $$')
+            )
+          ),
           tags$ol(
-            tags$li(
-              style = "font-size: 14px;",
-              "Upload your dataset using the 'Upload Input Data' button. The file must be in *.xlsx, *.csv, or *.txt format and input file should contain at least the following columns: 'cluster', 'time', and 'growth_metric'.
-              Upon uploading, the 'Best Fit Model' is automatically computed using the least-square regression type, based on R-squared deviations. If you select Mixed and press Best Fit Model, it will calculate and provide the best-fit model."
-            ),
+            
             tags$li(style = "font-size: 14px;", "Select model settings from the sidebar if you wish to override the automatic selection:"),
             tags$ul(
               tags$li(style = "font-size: 14px;", tags$b("Growth Function:"), " Choose the model to fit your data. Options include 'exponential', 'linear', 'logistic', and 'gompertz'."),
