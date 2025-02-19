@@ -18,15 +18,22 @@ library(magrittr)
 library(dplyr)
 
 shinyUI(fluidPage(
+  useShinyjs(),
   theme = shinytheme("cerulean"),
   titlePanel("GrowthCurveME RShiny"),
+  
   sidebarLayout(
     sidebarPanel(
       fileInput("data_file", "Upload Input Data (.xlsx, .csv, .txt):",
                 accept = c(".xlsx, .csv, .txt")),
+      
       selectInput("model_function", "Growth Function:",
-                  choices = c("exponential", "linear", "logistic", "gompertz"),
-                  selected = "exponential"),
+                  choices = c("exponential", "linear", "logistic", "gompertz")),
+      div(
+        actionButton("best_fit", "Best Fit Model", class = "best-fit-btn"),
+        style = "margin-bottom: 12px;" # Adjust as needed
+      ),
+      
       selectInput("model_type", "Regression Type:",
                   choices = c("mixed", "least-squares"),
                   selected = "mixed"),
@@ -38,8 +45,12 @@ shinyUI(fluidPage(
       textInput("report_title", "Report Title:"),
       actionButton("run", "Run Analysis"),
       downloadButton("download_report", "Download Results"),
-      downloadButton("download_sample", "Download Sample Data")
+      downloadButton("download_sample", "Download Sample Data"),
       
+      # Model Performance Section for BEST FIT
+      h3("Model Performance"),
+      textOutput("r_squared_value"),
+      tableOutput("model_performance_table")
     ),
     mainPanel(
       tabsetPanel(
@@ -76,9 +87,10 @@ shinyUI(fluidPage(
           tags$ol(
             tags$li(
               style = "font-size: 14px;",
-              "Upload your dataset using the 'Upload Input Data' button. The file must be in *.xlsx, *.csv, or *.txt format and input file should contain at least the following columns: 'cluster', 'time', and 'growth_metric'."
+              "Upload your dataset using the 'Upload Input Data' button. The file must be in *.xlsx, *.csv, or *.txt format and input file should contain at least the following columns: 'cluster', 'time', and 'growth_metric'.
+              Upon uploading, the 'Best Fit Model' is automatically computed using the least-square regression type, based on R-squared deviations. If you select Mixed and press Best Fit Model, it will calculate and provide the best-fit model."
             ),
-            tags$li(style = "font-size: 14px;", "Select model settings from the sidebar:"),
+            tags$li(style = "font-size: 14px;", "Select model settings from the sidebar if you wish to override the automatic selection:"),
             tags$ul(
               tags$li(style = "font-size: 14px;", tags$b("Growth Function:"), " Choose the model to fit your data. Options include 'exponential', 'linear', 'logistic', and 'gompertz'."),
               tags$li(style = "font-size: 14px;", tags$b("Regression Type:"), " Select 'mixed' for mixed-effects models or 'least-squares' for least-squares fitting."),
@@ -100,8 +112,9 @@ shinyUI(fluidPage(
               tags$a(href = "https://CRAN.R-project.org/package=GrowthCurveME", "https://CRAN.R-project.org/package=GrowthCurveME.")
             )
           ),
+          
           h3("View Your Data"),
-              plotOutput("InstructionsPlot", width = "600px", height = "400px")
+          plotOutput("InstructionsPlot", width = "600px", height = "400px")
         ),
         
         tabPanel("Regression Summary Table",
@@ -113,7 +126,7 @@ shinyUI(fluidPage(
                      uiOutput("summary_table")
                  )
         ),
-
+        
         tabPanel("Growth Plots", 
                  fluidRow(
                    column(3, selectInput("plot_type", "Select Plot Type:",
@@ -146,7 +159,7 @@ shinyUI(fluidPage(
           ),
           # Centering the plot 
           div(style = "display: flex; justify-content: center;",plotOutput("diagnostics"))
-        ),
+        )
       )
     )
   )
